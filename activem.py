@@ -1,7 +1,7 @@
 from lib import *
-from bot import *
-from swarm import *
-from arena import *
+from bot import Bot
+from swarm import Swarm
+from arena import Arena
 
 # Function used in FuncAnimation
 def animate(t, swarm):
