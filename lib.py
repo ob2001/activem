@@ -1,0 +1,34 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import random
+
+""" Functions """
+# Return the unit vector in the same direction as the
+# input vector
+def normalize(t):
+    return t/np.linalg.norm(t)
+
+# Return a random number with specified resolution in
+# specified range
+def randbw(a, res):
+    return random.randint(-res*a, res*a)/res
+
+# Returns Cartesian distance between two points
+def distance(r1, r2):
+    return np.sqrt((r2[0] - r1[0])**2 + (r2[1] - r1[1])**2)
+
+# Returns a unit vector pointing in the direction
+# of the angle theta (radians)
+def uvecfromang(theta):
+    return np.cos(theta), np.sin(theta)
+
+# Returns a unit vector pointing in the direction
+# of the angle theta (degrees)
+def uvecfromangd(theta):
+    return np.cos(np.deg2rad(theta)), np.sin(np.deg2rad(theta))
+
+# Returns the angle of a unit vector with respect
+# to the x-axis
+def angfromuvecd(v):
+    return np.arctan2(v[0], v[1])
