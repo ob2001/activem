@@ -1,5 +1,5 @@
 from lib import *
-from bot import Bot
+from circlebot import Bot
 from swarm import Swarm
 from arena import Arena
 
@@ -30,5 +30,5 @@ if(not plot):
     fig = plt.figure(figsize = (12, 9))
     ax = fig.add_subplot(111, xlim = (-arena.dw, arena.dw), ylim = (-arena.dh, arena.dh))
     ani = FuncAnimation(fig, animate, fargs = (swarm,), interval = 10, frames = None, repeat = False)
-    #ani.save("animation.mp4", fps = 30)
+    # ani.save("animation.mp4", fps = 30)
     plt.show()
