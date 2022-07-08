@@ -1,8 +1,8 @@
 from lib import *
 
 class Swarm:
-    collrad = 1
-    elastic = 0.02
+    collrad = 0.3
+    collang = np.pi
 
     def __init__(self, Arena, n, Bot):
         self.Arena = Arena
@@ -14,17 +14,17 @@ class Swarm:
     # to update the bots' angles, perform movement, and
     # check collisions
     def update(self):
-        # self.updateang()
+        self.updateuvec()
         self.updatepos()
         self.docollisions()
 
     # Change the angle of the bot by a small random amount
-    def updateang(self):
+    def updateuvec(self):
         for bot in self.botlist:
             bot.rotate(randbw(1, 100), randbw(0.1, 100))
-            # bot.rotatecart(randbw(0.1, 100), randbw(0.1, 100))
+            bot.rotatecart(randbw(0.1, 100), randbw(0.1, 100))
 
-    # Step the bot forward on unit of its velocity
+    # Step the bot forward one unit of its velocity
     # in the direction of its uvec
     def updatepos(self):
         for bot in self.botlist:
@@ -43,16 +43,21 @@ class Swarm:
                 bot.pos[1] = self.Arena.h
                 bot.uvec[1] *= -1
 
-    # Check whether each bot is in range of others.
-    # If so, [do something that deflects them]
+    # Check whether each bot is in range of others
+    # and is on a collision course. If so,
+    # [do something that deflects them and/or shifts them
+    # back out of each others' collision boxes]
     def docollisions(self):
         for i in range(len(self.botlist)):
-            for j in range(i + 1, len(self.botlist)):
+            for j in range(len(self.botlist)):
+                if(i == j):
+                    continue
                 bota, botb = self.botlist[i], self.botlist[j]
                 d = distance(bota.pos, botb.pos)
-                if(d < self.collrad):
-                    bota.rotate(1, np.pi)
-                    botb.rotate(-1, np.pi)
+                if(d < self.collrad and angle(bota.uvec, botb.uvec) < self.collang and sees(bota.pos, bota.uvec, self.collang, botb.pos)[0]):
+                    vec = vecdiffr(bota.pos, botb.pos, d/2)
+                    botb.pos += vec
+                    bota.pos -= vec
 
     # Generate and return a list of bots with positions
     # and directions having the specified resolutions
