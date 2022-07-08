@@ -16,7 +16,7 @@ def animate(t, swarm):
 plot = False
 numbots = 10
 arena = Arena(5, 5)
-swarm = Swarm(arena, 10, Bot)
+swarm = Swarm(arena, numbots, Bot)
 
 if(plot):
     fig = plt.figure(figsize = (12, 9))
