@@ -18,6 +18,10 @@ def randbw(a, res):
 def distance(r1, r2):
     return np.sqrt((r2[0] - r1[0])**2 + (r2[1] - r1[1])**2)
 
+# Returns the angle between two vectors
+def angle(r1, r2):
+    return np.arccos(r1@r2/np.sqrt(r1@r1*r2@r2))
+
 # Returns a unit vector pointing in the direction
 # of the angle theta (radians)
 def uvecfromang(theta):
