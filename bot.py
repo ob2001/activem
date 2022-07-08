@@ -13,8 +13,7 @@ class Bot:
 
         self.normalizeuvec()
 
-    # Utility function for internal use by
-    # a particular bot
+    # Renormalizes bot's uvec
     def normalizeuvec(self):
         self.uvec = self.uvec/np.linalg.norm(self.uvec)
 
