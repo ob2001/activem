@@ -22,6 +22,16 @@ def distance(r1, r2):
 def angle(r1, r2):
     return np.arccos(r1@r2/np.sqrt(r1@r1*r2@r2))
 
+# Returns True if point is in vision cone
+# Returns False otherwise
+def sees(r1, u1, thetavis, r2):
+    phi = angle(u1 - r1, r2 - r1)
+    return [True, phi] if phi < thetavis else [False, 0.]
+
+# Return a vector of length r pointing from r1 to r2
+def vecdiffr(r1, r2, r):
+    return r*(r2 - r1)/np.linalg.norm(r2 - r1)
+
 # Returns a unit vector pointing in the direction
 # of the angle theta (radians)
 def uvecfromang(theta):
