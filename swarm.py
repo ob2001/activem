@@ -45,8 +45,9 @@ class Swarm:
 
     # Check whether each bot is in range of others
     # and is on a collision course. If so,
-    # [do something that deflects them and/or shifts them
-    # back out of each others' collision boxes]
+    # shift each of them away from each other by half
+    # the distance required to get them out of collision
+    # range
     def docollisions(self):
         for i in range(len(self.botlist)):
             for j in range(len(self.botlist)):
@@ -54,8 +55,8 @@ class Swarm:
                     continue
                 bota, botb = self.botlist[i], self.botlist[j]
                 d = distance(bota.pos, botb.pos)
-                if(d < self.collrad and angle(bota.uvec, botb.uvec) < self.collang and sees(bota.pos, bota.uvec, self.collang, botb.pos)[0]):
-                    vec = vecdiffr(bota.pos, botb.pos, d/2)
+                if(d < self.collrad and angle(bota.uvec, vecdiffr(bota.pos, botb.pos, 1)) < self.collang and sees(bota.pos, bota.uvec, self.collang, botb.pos)[0]):
+                    vec = vecdiffr(bota.pos, botb.pos, (self.collrad - d)/2)
                     botb.pos += vec
                     bota.pos -= vec
 
