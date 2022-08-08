@@ -6,3 +6,6 @@ class Bot:
 
     def rotatecart(self, x: float, y: float):
         pass
+
+    def update(self):
+        pass
