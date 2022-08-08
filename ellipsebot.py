@@ -15,7 +15,7 @@ class EllipseBot(Bot):
 
     # Get bot's ovec
     def getovec(self):
-        return [[0, 1], [-1, 0]]@self.uvec
+        return rotvec(-np.pi/2)@self.uvec
 
     def collision(self, botb):
         pass
