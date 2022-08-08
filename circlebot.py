@@ -1,8 +1,9 @@
 from lib import *
+from bot import Bot
 
 # Class for each individual bot. Each one will have
 # access to its own position, direction, etc.
-class Bot:
+class CircleBot(Bot):
     v = 0.08
 
     def __init__(self, pos, uvec, arena, xbound, ybound):
