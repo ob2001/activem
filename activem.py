@@ -1,5 +1,7 @@
 from lib import *
-from circlebot import Bot
+from bot import Bot
+from circlebot import CircleBot
+from ellipsebot import EllipseBot
 from swarm import Swarm
 from arena import Arena
 
@@ -16,7 +18,7 @@ def animate(t, swarm):
 save = False
 numbots = 10
 arena = Arena(5, 5)
-swarm = Swarm(arena, numbots, Bot)
+swarm = Swarm(arena, numbots, CircleBot)
 
 if(save):
     aniframes = 300
