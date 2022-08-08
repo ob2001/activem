@@ -1,10 +1,12 @@
 from lib import *
+from arena import Arena
+from bot import Bot
 
 class Swarm:
     collrad = 0.3
     collang = np.pi
 
-    def __init__(self, Arena, n, Bot):
+    def __init__(self, Arena: Arena, n, Bot: Bot):
         self.Arena = Arena
         self.n = n
         self.Bot = Bot
