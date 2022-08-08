@@ -3,9 +3,6 @@ from arena import Arena
 from bot import Bot
 
 class Swarm:
-    collrad = 0.3
-    collang = np.pi
-
     def __init__(self, Arena: Arena, n, Bot: Bot):
         self.Arena = Arena
         self.n = n
@@ -55,15 +52,10 @@ class Swarm:
             for j in range(len(self.botlist)):
                 if(i == j):
                     continue
-                bota, botb = self.botlist[i], self.botlist[j]
-                d = distance(bota.pos, botb.pos)
-                if(d < self.collrad and angle(bota.uvec, vecdiffr(bota.pos, botb.pos, 1)) < self.collang and sees(bota.pos, bota.uvec, self.collang, botb.pos)[0]):
-                    vec = vecdiffr(bota.pos, botb.pos, (self.collrad - d)/2)
-                    botb.pos += vec
-                    bota.pos -= vec
+                self.botlist[i].collision(self.botlist[j])
 
     # Generate and return a list of bots with positions
     # and directions having the specified resolutions
     def generate(self, n, p_res = 100, d_res = 100):
         W, H = self.Arena.w, self.Arena.h
-        return [self.Bot([randbw(W, p_res), randbw(H, p_res)], [randbw(1, d_res), randbw(1, d_res)], self.Arena, self.Arena.w, self.Arena.h) for i in range(n)]
+        return [self.Bot(W, H, p_res, d_res) for i in range(n)]
