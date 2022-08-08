@@ -46,3 +46,6 @@ def uvecfromangd(theta):
 # to the x-axis
 def angfromuvecd(v):
     return np.arctan2(v[0], v[1])
+
+def rotvec(v, theta):
+    return [[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]]@v
