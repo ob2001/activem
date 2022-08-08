@@ -9,6 +9,15 @@ class Swarm:
         self.Bot = Bot
         self.botlist = self.generate(n)
 
+    # Function used when animating bots.
+    # Updates and redraws on given axis.
+    def animate(self, t, ax):
+        ax.clear()
+        ax.set_xlim(-self.Arena.dw, self.Arena.dw)
+        ax.set_ylim(-self.Arena.dh, self.Arena.dh)
+        self.update()
+        self.draw(ax)
+    
     # This function is called on every frame of animation
     # to update the bots' angles, perform movement, and
     # check collisions
@@ -20,8 +29,7 @@ class Swarm:
     # Change the angle of the bot by a small random amount
     def updateuvec(self):
         for bot in self.botlist:
-            bot.rotate(randbw(1, 100), randbw(0.1, 100))
-            bot.rotatecart(randbw(0.1, 100), randbw(0.1, 100))
+            bot.rotate(randbw(0.2, 100))
 
     # Step the bot forward one unit of its velocity
     # in the direction of its uvec
@@ -53,6 +61,12 @@ class Swarm:
                 if(i == j):
                     continue
                 self.botlist[i].collision(self.botlist[j])
+
+    def draw(self, ax):
+        for bot in self.botlist:
+            bot.draw(ax)
+        [ax.plot(bot.pos[0], bot.pos[1], 'bo') for bot in self.botlist]
+        [ax.quiver(bot.pos[0], bot.pos[1], bot.uvec[0], bot.uvec[1], width = 0.003) for bot in self.botlist]
 
     # Generate and return a list of bots with positions
     # and directions having the specified resolutions
