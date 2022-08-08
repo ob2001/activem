@@ -4,9 +4,10 @@ from bot import Bot
 # Class for each individual bot. Each one will have
 # access to its own position, direction, etc.
 class CircleBot(Bot):
-    v = 0.08
+    v = 0.8
     collrad = 1.0
     collang = np.pi
+    name = "CircleBot"
 
     def __init__(self, W, H, p_res, d_res):
         self.pos = [randbw(W, p_res), randbw(H, p_res)]
