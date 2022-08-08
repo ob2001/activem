@@ -5,28 +5,21 @@ from bot import Bot
 # access to its own position, direction, etc.
 class CircleBot(Bot):
     v = 0.08
-    collrad = 1.5
+    collrad = 1.0
     collang = np.pi
 
     def __init__(self, W, H, p_res, d_res):
         self.pos = [randbw(W, p_res), randbw(H, p_res)]
         self.uvec = [randbw(1, d_res), randbw(1, d_res)]
-
         self.normalizeuvec()
 
     # Renormalizes bot's uvec
     def normalizeuvec(self):
         self.uvec = self.uvec/np.linalg.norm(self.uvec)
 
-    # Rotate uvec directly via its x and y coordinates
-    # rather than providing an angle to rotate by
-    def rotatecart(self, x, y):
-        self.uvec += [x, y]
-        self.normalizeuvec()
-
     # Rotate uvec by angle specified.
-    def rotate(self, theta, r):
-        self.uvec += [r*np.cos(theta), r*np.sin(theta)]
+    def rotate(self, theta):
+        self.uvec = rotvec(self.uvec, theta)
         self.normalizeuvec()
 
     def collision(self, botb):
@@ -35,3 +28,6 @@ class CircleBot(Bot):
             vec = vecdiffr(self.pos, botb.pos, (self.collrad - d)/2)
             botb.pos += vec
             self.pos -= vec
+
+    def draw(self, ax):
+        ax.add_patch(plt.Circle((self.pos[0], self.pos[1]), self.collrad/2, fill = False, edgecolor = 'black'))
