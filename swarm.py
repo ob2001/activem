@@ -10,8 +10,13 @@ class Swarm:
         self.botlist = self.generate(n)
 
     # Function used when animating bots.
-    # Updates and redraws on given axis.
+    # Updates bots and redraws on given axis.
     def animate(self, t, ax):
+        # ** Use this to update the bounds of the arena while animating ** #
+        # if(t == 100):
+        #     self.Arena.w *= 5
+        #     self.Arena.h *= 5
+        #     self.Arena.boundsup()
         ax.clear()
         ax.set_xlim(-self.Arena.dw, self.Arena.dw)
         ax.set_ylim(-self.Arena.dh, self.Arena.dh)
@@ -71,5 +76,4 @@ class Swarm:
     # Generate and return a list of bots with positions
     # and directions having the specified resolutions
     def generate(self, n, p_res = 100, d_res = 100):
-        W, H = self.Arena.w, self.Arena.h
-        return [self.Bot(W, H, p_res, d_res) for i in range(n)]
+        return [self.Bot(self.Arena.w, self.Arena.h, p_res, d_res, 0.75, 1.5) for i in range(n)]
