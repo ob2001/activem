@@ -1,11 +1,9 @@
 from lib import *
 
 class Bot:
-    def rotate(self, theta: float, r: float):
+    def rotate(self, theta: float):
         pass
 
-    def rotatecart(self, x: float, y: float):
-        pass
-
-    def update(self):
+    def draw():
+        """Method used to draw bot shape at correct position and with correct orientation, size, etc"""
         pass
