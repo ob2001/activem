@@ -1,13 +1,16 @@
 from lib import *
-from arena import Arena
 from bot import Bot
+from arena import Arena
 
 class Swarm:
-    def __init__(self, Arena: Arena, n, Bot: Bot):
+    def __init__(self, Arena: Arena, n, Bot: Bot, **kwargs):
         self.Arena = Arena
         self.n = n
         self.Bot = Bot
-        self.botlist = self.generate(n)
+
+        # Generate and return a list of bots with positions
+        # and directions having the specified resolutions
+        self.botlist = [self.Bot(self.Arena.w, self.Arena.h, kwargs) for _ in range(n)]
 
     # Function used when animating bots.
     # Updates bots and redraws on given axis.
@@ -59,8 +62,3 @@ class Swarm:
             bot.draw(ax)
         [ax.plot(bot.pos[0], bot.pos[1], 'bo') for bot in self.botlist]
         [ax.quiver(bot.pos[0], bot.pos[1], bot.uvec[0], bot.uvec[1], width = 0.003) for bot in self.botlist]
-
-    # Generate and return a list of bots with positions
-    # and directions having the specified resolutions
-    def generate(self, n, p_res = 100, d_res = 100):
-        return [self.Bot(self.Arena.w, self.Arena.h, p_res, d_res, 0.75, 1.5) for i in range(n)]
