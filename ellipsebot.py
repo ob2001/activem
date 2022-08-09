@@ -6,7 +6,8 @@ class EllipseBot(Bot):
     v = 0.08
     name = "EllipseBot"
 
-    def __init__(self, W, H, p_res, d_res, a = None, b = None):
+    def __init__(self, W, H, kwargs, p_res = 100, d_res = 100):
+        a, b = kwargs['a'], kwargs['b']
         self.pos = np.array([randbw(W, p_res), randbw(H, p_res)])
         self.uvec = np.array([randbw(1, d_res), randbw(1, d_res)]) # Points in direction of major axis
         self.normalizeuvec()

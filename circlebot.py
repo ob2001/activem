@@ -9,7 +9,7 @@ class CircleBot(Bot):
     collang = np.pi
     name = "CircleBot"
 
-    def __init__(self, W, H, p_res, d_res, a, b):
+    def __init__(self, W, H, kwargs, p_res = 100, d_res = 100):
         self.pos = [randbw(W, p_res), randbw(H, p_res)]
         self.uvec = [randbw(1, d_res), randbw(1, d_res)]
         self.normalizeuvec()
