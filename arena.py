@@ -8,6 +8,10 @@ class Arena(ABC):
     # TODO - Solid
     # DONE - Reflective
 
+    # TODO: Boundary shapes:
+    # TODO - Circular
+    # Done - Rectangular
+
     @abstractmethod
     def boundsup(self):
         pass
