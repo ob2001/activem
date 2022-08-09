@@ -39,21 +39,7 @@ class Swarm:
     # Step the bot forward one unit of its velocity
     # in the direction of its uvec
     def updatepos(self):
-        for bot in self.botlist:
-            bot.pos += bot.v*bot.uvec
-            
-            if(bot.pos[0] < -self.Arena.w):
-                bot.pos[0] = -self.Arena.w
-                bot.uvec[0] *= -1
-            elif(bot.pos[0] > self.Arena.w):
-                bot.pos[0] = self.Arena.w
-                bot.uvec[0] *= -1
-            if(bot.pos[1] < -self.Arena.h):
-                bot.pos[1] = -self.Arena.h
-                bot.uvec[1] *= -1
-            elif(bot.pos[1] > self.Arena.h):
-                bot.pos[1] = self.Arena.h
-                bot.uvec[1] *= -1
+        for bot in self.botlist: bot.pos += bot.v*bot.uvec
 
     # Check whether each bot is in range of others
     # and is on a collision course. If so,
@@ -61,6 +47,7 @@ class Swarm:
     # the distance required to get them out of collision
     # range
     def docollisions(self):
+        self.Arena.boundcoll(self.botlist)
         for i in range(len(self.botlist)):
             for j in range(len(self.botlist)):
                 if(i == j):
