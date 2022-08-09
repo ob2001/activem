@@ -5,11 +5,11 @@ from bot import Bot
 # access to its own position, direction, etc.
 class CircleBot(Bot):
     v = 0.8
-    collrad = 1.0
+    collrad = 4.0
     collang = np.pi
     name = "CircleBot"
 
-    def __init__(self, W, H, p_res, d_res):
+    def __init__(self, W, H, p_res, d_res, a, b):
         self.pos = [randbw(W, p_res), randbw(H, p_res)]
         self.uvec = [randbw(1, d_res), randbw(1, d_res)]
         self.normalizeuvec()
