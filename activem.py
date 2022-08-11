@@ -4,6 +4,9 @@ from circlebot import CircleBot
 from ellipsebot import EllipseBot
 from sqreflarena import SqReflArena
 
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
 """ Main Body """
 save = False
 l, w, numbots = 5, 5, 10
