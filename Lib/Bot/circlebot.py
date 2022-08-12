@@ -7,26 +7,19 @@ from matplotlib.patches import Circle
 class CircleBot(Bot):
     v = 0.08
     collrad = 1.0
-    collang = np.pi
     name = "CircleBot"
 
-    def __init__(self, W, H, kwargs):
+    def __init__(self, W, H, upf, upfargs, **kwargs):
         self.pos = [randbw(W), randbw(H)]
         self.uvec = [randbw(1), randbw(1)]
         self.normalizeuvec()
-
-    # Renormalizes bot's uvec
-    def normalizeuvec(self):
-        self.uvec = self.uvec/np.linalg.norm(self.uvec)
-
-    # Rotate uvec by angle specified.
-    def rotate(self, theta):
-        self.uvec = rotvec(self.uvec, theta)
-        self.normalizeuvec()
+        self.upf = upf
+        self.upfargs = upfargs
 
     def collision(self, botb):
+        collang = np.pi
         d = distance(self.pos, botb.pos)
-        if(d < self.collrad and angle(self.uvec, vecdiffr(self.pos, botb.pos, 1)) < self.collang and sees(self.pos, self.uvec, self.collang, botb.pos)[0]):
+        if(d < self.collrad and angle(self.uvec, vecdiffr(self.pos, botb.pos, 1)) < collang and sees(self.pos, self.uvec, collang, botb.pos)[0]):
             vec = vecdiffr(self.pos, botb.pos, (self.collrad - d)/2)
             botb.pos += vec
             self.pos -= vec

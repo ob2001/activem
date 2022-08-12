@@ -20,14 +20,6 @@ class EllipseBot(Bot):
         else:
             self.a, self.b = randbw(1), b
 
-    # Renormalizes bot's uvec
-    def normalizeuvec(self):
-        self.uvec = self.uvec/np.linalg.norm(self.uvec)
-
-    def rotate(self, theta):
-        self.uvec = rotvec(self.uvec, theta)
-        self.normalizeuvec()
-
     # Get bot's ovec
     def getovec(self):
         return rotvec(self.uvec, -np.pi/2)
