@@ -11,6 +11,10 @@ class Bot(ABC):
         pass
 
     @abstractmethod
+    def rotatef(self, func, args):
+        pass
+
+    @abstractmethod
     def draw():
         """Method used to draw bot shape at correct position and with correct orientation, size, etc"""
         pass
