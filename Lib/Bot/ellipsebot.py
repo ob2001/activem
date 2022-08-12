@@ -28,6 +28,10 @@ class EllipseBot(Bot):
         self.uvec = rotvec(self.uvec, theta)
         self.normalizeuvec()
 
+    def rotatef(self, func, args):
+        self.uvec = rotvec(self.uvec, func(*args))
+        self.normalizeuvec()
+
     # Get bot's ovec
     def getovec(self):
         return rotvec(self.uvec, -np.pi/2)

@@ -5,8 +5,8 @@ from matplotlib.patches import Circle
 # Class for each individual bot. Each one will have
 # access to its own position, direction, etc.
 class CircleBot(Bot):
-    v = 0.8
-    collrad = 4.0
+    v = 0.08
+    collrad = 1.0
     collang = np.pi
     name = "CircleBot"
 
@@ -22,6 +22,10 @@ class CircleBot(Bot):
     # Rotate uvec by angle specified.
     def rotate(self, theta):
         self.uvec = rotvec(self.uvec, theta)
+        self.normalizeuvec()
+
+    def rotatef(self, func, args):
+        self.uvec = rotvec(self.uvec, func(*args))
         self.normalizeuvec()
 
     def collision(self, botb):
