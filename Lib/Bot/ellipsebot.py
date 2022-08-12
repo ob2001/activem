@@ -1,4 +1,4 @@
-from ..lib import *
+from ..lib import np, randbw, rotvec, angfromuvecd
 from .bot import Bot
 from matplotlib.patches import Ellipse
 
@@ -6,7 +6,7 @@ class EllipseBot(Bot):
     v = 0.08
     name = "EllipseBot"
 
-    def __init__(self, W, H, kwargs, p_res = 100, d_res = 100):
+    def __init__(self, W, H, kwargs):
         a, b = kwargs['a'], kwargs['b']
         self.pos = np.array([randbw(W), randbw(H)])
         self.uvec = np.array([randbw(1), randbw(1)]) # Points in direction of major axis

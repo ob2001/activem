@@ -1,4 +1,4 @@
-from ..lib import *
+from ..lib import np, randbw, rotvec, distance, angle, vecdiffr, sees
 from .bot import Bot
 from matplotlib.patches import Circle
 
@@ -10,7 +10,7 @@ class CircleBot(Bot):
     collang = np.pi
     name = "CircleBot"
 
-    def __init__(self, W, H, kwargs, p_res = 100, d_res = 100):
+    def __init__(self, W, H, kwargs):
         self.pos = [randbw(W), randbw(H)]
         self.uvec = [randbw(1), randbw(1)]
         self.normalizeuvec()
