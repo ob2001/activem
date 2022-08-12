@@ -1,4 +1,3 @@
-from lib import *
 from .arena import Arena
 
 class SqReflArena(Arena):

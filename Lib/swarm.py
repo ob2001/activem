@@ -1,4 +1,3 @@
-from .lib import *
 from Lib.Bot.bot import Bot
 from Lib.Arena.arena import Arena
 

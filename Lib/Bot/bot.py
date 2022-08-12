@@ -1,4 +1,3 @@
-from lib import *
 from abc import ABC, abstractmethod
 
 class Bot(ABC):
