@@ -8,17 +8,17 @@ class EllipseBot(Bot):
 
     def __init__(self, W, H, kwargs, p_res = 100, d_res = 100):
         a, b = kwargs['a'], kwargs['b']
-        self.pos = np.array([randbw(W, p_res), randbw(H, p_res)])
-        self.uvec = np.array([randbw(1, d_res), randbw(1, d_res)]) # Points in direction of major axis
+        self.pos = np.array([randbw(W), randbw(H)])
+        self.uvec = np.array([randbw(1), randbw(1)]) # Points in direction of major axis
         self.normalizeuvec()
         if(a is None and b is None):
-            self.a, self.b = randbw(1, d_res), randbw(1, d_res)
+            self.a, self.b = randbw(1), randbw(1)
         elif(a is not None and b is not None):
             self.a, self.b = a, b
         elif(a is not None):
-            self.a, self.b = a, randbw(1, d_res)
+            self.a, self.b = a, randbw(1)
         else:
-            self.a, self.b = randbw(1, d_res), b
+            self.a, self.b = randbw(1), b
 
     # Renormalizes bot's uvec
     def normalizeuvec(self):

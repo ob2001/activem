@@ -9,8 +9,8 @@ def normalize(t):
 
 # Return a random number with specified resolution in
 # specified range
-def randbw(a, res):
-    return random.randint(-res*a, res*a)/res
+def randbw(a):
+    return random.uniform(-a, a)
 
 # Returns Cartesian distance between two points
 def distance(r1, r2):

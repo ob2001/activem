@@ -11,8 +11,8 @@ class CircleBot(Bot):
     name = "CircleBot"
 
     def __init__(self, W, H, kwargs, p_res = 100, d_res = 100):
-        self.pos = [randbw(W, p_res), randbw(H, p_res)]
-        self.uvec = [randbw(1, d_res), randbw(1, d_res)]
+        self.pos = [randbw(W), randbw(H)]
+        self.uvec = [randbw(1), randbw(1)]
         self.normalizeuvec()
 
     # Renormalizes bot's uvec

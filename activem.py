@@ -11,7 +11,7 @@ from matplotlib.animation import FuncAnimation
 save = False
 l, w, numbots = 5, 5, 10
 swarm = Swarm(SqReflArena(l, w), numbots, CircleBot, a = 0.25, b = 1.5)
-anif, anifargs = random.gauss, (0.01, 0.2)
+anif, anifargs = randbw, (0.2,)
 
 if(save):
     aniframes = 300
