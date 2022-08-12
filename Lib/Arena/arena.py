@@ -3,8 +3,8 @@ from abc import ABC, abstractmethod
 # Class for the arena in which the bots are interacting.
 class Arena(ABC):
     # TODO: Boundary types:
-    # TODO - Periodic
     # TODO - Solid
+    # Done - Periodic
     # DONE - Reflective
 
     # TODO: Boundary shapes:
