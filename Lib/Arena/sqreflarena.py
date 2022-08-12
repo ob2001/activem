@@ -1,5 +1,5 @@
 from lib import *
-from arena import Arena
+from .arena import Arena
 
 class SqReflArena(Arena):
     name = "SqReflArena"

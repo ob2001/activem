@@ -1,6 +1,6 @@
-from lib import *
-from bot import Bot
-from arena import Arena
+from .lib import *
+from Lib.Bot.bot import Bot
+from Lib.Arena.arena import Arena
 
 class Swarm:
     def __init__(self, Arena: Arena, n, Bot: Bot, **kwargs):

@@ -1,5 +1,6 @@
-from lib import *
-from bot import Bot
+from ..lib import *
+from .bot import Bot
+from matplotlib.patches import Circle
 
 # Class for each individual bot. Each one will have
 # access to its own position, direction, etc.
@@ -31,4 +32,4 @@ class CircleBot(Bot):
             self.pos -= vec
 
     def draw(self, ax):
-        ax.add_patch(plt.Circle((self.pos[0], self.pos[1]), self.collrad/2, fill = False, edgecolor = 'black'))
+        ax.add_patch(Circle((self.pos[0], self.pos[1]), self.collrad/2, fill = False, edgecolor = 'black'))

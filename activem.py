@@ -1,8 +1,8 @@
 from lib import *
-from swarm import Swarm
-from circlebot import CircleBot
-from ellipsebot import EllipseBot
-from sqreflarena import SqReflArena
+from Lib.swarm import Swarm
+from Lib.Bot.circlebot import CircleBot
+from Lib.Bot.ellipsebot import EllipseBot
+from Lib.Arena.sqreflarena import SqReflArena
 
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation

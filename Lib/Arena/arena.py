@@ -1,4 +1,4 @@
-from lib import *
+from ..lib import *
 from abc import ABC, abstractmethod
 
 # Class for the arena in which the bots are interacting.

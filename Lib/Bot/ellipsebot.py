@@ -1,5 +1,5 @@
-from lib import *
-from bot import Bot
+from ..lib import *
+from .bot import Bot
 from matplotlib.patches import Ellipse
 
 class EllipseBot(Bot):
