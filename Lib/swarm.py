@@ -14,7 +14,7 @@ class Swarm:
 
     # Function used when animating bots.
     # Updates bots and redraws on given axis.
-    def animate(self, t, ax):
+    def animate(self, t, ax, func, *args):
         # ** Use this to update the bounds of the arena while animating ** #
         # if(t == 100):
         #     self.Arena.w *= 5
@@ -23,21 +23,21 @@ class Swarm:
         ax.clear()
         ax.set_xlim(-self.Arena.dw, self.Arena.dw)
         ax.set_ylim(-self.Arena.dh, self.Arena.dh)
-        self.update()
+        self.update(func, args)
         self.draw(ax)
     
     # This function is called on every frame of animation
     # to update the bots' angles, perform movement, and
     # check collisions
-    def update(self):
-        self.updateuvec()
+    def update(self, func, args):
+        self.updateuvec(func, args)
         self.updatepos()
         self.docollisions()
 
     # Change the angle of the bot by a small random amount
-    def updateuvec(self):
+    def updateuvec(self, func, args):
         for bot in self.botlist:
-            bot.rotate(randbw(0.2, 100))
+            bot.rotatef(func, args)
 
     # Step the bot forward one unit of its velocity
     # in the direction of its uvec
