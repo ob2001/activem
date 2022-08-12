@@ -36,7 +36,7 @@ class Swarm:
     # Change the angle of the bot by a small random amount
     def updateuvec(self, func, args):
         for bot in self.botlist:
-            bot.rotatef(func, args)
+            bot.rotate(func(*args))
 
     # Step the bot forward one unit of its velocity
     # in the direction of its uvec

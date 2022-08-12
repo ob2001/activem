@@ -24,10 +24,6 @@ class CircleBot(Bot):
         self.uvec = rotvec(self.uvec, theta)
         self.normalizeuvec()
 
-    def rotatef(self, func, args):
-        self.uvec = rotvec(self.uvec, func(*args))
-        self.normalizeuvec()
-
     def collision(self, botb):
         d = distance(self.pos, botb.pos)
         if(d < self.collrad and angle(self.uvec, vecdiffr(self.pos, botb.pos, 1)) < self.collang and sees(self.pos, self.uvec, self.collang, botb.pos)[0]):

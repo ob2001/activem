@@ -10,7 +10,6 @@ from Lib.Bot.circlebot import CircleBot
 from Lib.Bot.ellipsebot import EllipseBot
 from Lib.Arena.sqreflarena import SqReflArena
 
-
 """ Main Body """
 dataout, animate, save = False, True, False
 l, w, numbots = 5, 5, 10
