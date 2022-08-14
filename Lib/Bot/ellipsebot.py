@@ -6,11 +6,13 @@ class EllipseBot(Bot):
     v = 0.08
     name = "EllipseBot"
 
-    def __init__(self, W, H, kwargs):
+    def __init__(self, W, H, upf, upfargs, **kwargs):
         a, b = kwargs['a'], kwargs['b']
         self.pos = np.array([randbw(W), randbw(H)])
         self.uvec = np.array([randbw(1), randbw(1)]) # Points in direction of major axis
         self.normalizeuvec()
+        self.upf = upf
+        self.upfargs = upfargs
         if(a is None and b is None):
             self.a, self.b = randbw(1), randbw(1)
         elif(a is not None and b is not None):
