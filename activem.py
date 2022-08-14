@@ -4,20 +4,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
+from Lib.lib import randbw
 from Lib.swarm import Swarm
-
-from Lib.Bot.circlebot import CircleBot
-from Lib.Bot.ellipsebot import EllipseBot
-from Lib.Bot.vicsekbot import VicsekBot
-
-from Lib.Arena.sqreflarena import SqReflArena
-from Lib.Arena.sqperarena import SqPerArena
-from Lib.Arena.sqsolarena import SqSolArena
+from Lib.bots import CircleBot, EllipseBot, VicsekBot
+from Lib.arenas import SqPerArena, SqReflArena, SqSolArena
 
 """ Main Body """
 dataout, animate, save = False, True, False
 l, w, numbots = 5, 5, 10
-swarm = Swarm(SqPerArena(l, w), numbots, VicsekBot, gauss, (0, 0.2), a = 0.25, b = 1.5)
+swarm = Swarm(SqReflArena(l, w), numbots, CircleBot, gauss, (0, 0.2), r = 1, a = 0.25, b = 1.5)
 
 if(save and animate):
     upframes = 300
