@@ -26,8 +26,5 @@ class EllipseBot(Bot):
     def getovec(self):
         return rotvec(self.uvec, -np.pi/2)
 
-    def collision(self, botb):
-        pass
-
     def draw(self, ax):
         ax.add_patch(Ellipse((self.pos[0], self.pos[1]), self.a, self.b, fill = False, angle = 90 + angfromuvecd(self.uvec)))

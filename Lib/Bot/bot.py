@@ -8,10 +8,6 @@ class Bot(ABC):
         pass
 
     @abstractmethod
-    def collision(self, botb):
-        pass
-
-    @abstractmethod
     def draw(ax):
         """Method used to draw bot shape at correct position and with correct orientation, size, etc"""
         pass
