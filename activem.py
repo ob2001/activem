@@ -6,13 +6,16 @@ from matplotlib.animation import FuncAnimation
 
 from Lib.lib import randbw
 from Lib.swarm import Swarm
-from Lib.bots import CircleBot, EllipseBot, VicsekBot
 from Lib.arenas import SqPerArena, SqReflArena, SqSolArena
+from Lib.bots import CircleBot, EllipseBot, VicsekBot
+from Lib.interaction import InteractionMethods as IM
 
 """ Main Body """
 dataout, animate, save = False, True, False
 l, w, numbots = 5, 5, 10
-swarm = Swarm(SqReflArena(l, w), numbots, CircleBot, gauss, (0, 0.2), r = 1, a = 0.25, b = 1.5)
+arena = SqReflArena(l, w)
+botlist = [CircleBot(gauss, (0, 0.2), 0.5) for _ in range(numbots)]
+swarm = Swarm(arena, botlist, IM.ccollide)
 
 if(save and animate):
     upframes = 300

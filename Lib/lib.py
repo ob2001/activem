@@ -16,19 +16,13 @@ def randbw(a):
 def distance(r1, r2):
     return np.sqrt((r2[0] - r1[0])**2 + (r2[1] - r1[1])**2)
 
-# Returns the angle between two vectors
-def angle(r1, r2):
-    return np.arccos(r1@r2/np.sqrt(r1@r1*r2@r2))
+# Return the unit vector pointing from r1 to r2
+def vecdiffn(r1, r2):
+    return (r2 - r1)/np.linalg.norm(r2 - r1)
 
-# Returns True if point is in vision cone
-# Returns False otherwise
-def sees(r1, u1, thetavis, r2):
-    phi = angle(u1 - r1, r2 - r1)
-    return [True, phi] if phi < thetavis else [False, 0.]
-
-# Return a vector of length r pointing from r1 to r2
+# Return the vector of length r pointing from r1 to r2
 def vecdiffr(r1, r2, r):
-    return r*(r2 - r1)/np.linalg.norm(r2 - r1)
+    return r*vecdiffn(r1, r2)
 
 # Returns a unit vector pointing in the direction
 # of the angle theta (radians)
@@ -45,5 +39,7 @@ def uvecfromangd(theta):
 def angfromuvecd(v):
     return np.rad2deg(np.arctan2(v[1], v[0]))
 
+# Rotate the given vector v by the angle theta in the
+# CCW direction
 def rotvec(v, theta):
     return [[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]]@v

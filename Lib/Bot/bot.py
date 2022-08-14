@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ..lib import np, rotvec
+from ..lib import np, rotvec, randbw, uvecfromang
 
 class Bot(ABC):
     @abstractmethod
@@ -20,3 +20,10 @@ class Bot(ABC):
     # Renormalizes bot's uvec
     def normalizeuvec(self):
         self.uvec = self.uvec/np.linalg.norm(self.uvec)
+
+    def randpos(self, w, h):
+        self.pos = [randbw(w), randbw(h)]
+
+    def randuvec(self):
+        self.uvec = uvecfromang(randbw(np.pi))
+        self.normalizeuvec()

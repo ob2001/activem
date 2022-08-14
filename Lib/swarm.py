@@ -1,14 +1,18 @@
-from Lib.Bot.bot import Bot
-from Lib.Arena.arena import Arena
-
 class Swarm:
-    def __init__(self, Arena: Arena, n, Bot: Bot, upf, upfargs, **kwargs):
-        self.Arena = Arena
-        self.n = n
-        self.Bot = Bot
+    def __init__(self, arena, botlist, collf):
+        self.Arena = arena
+        self.botlist = botlist
+        self.collf = collf
 
-        # Generate and return a list of bots with randomized positions and directions
-        self.botlist = [self.Bot(self.Arena.w, self.Arena.h, upf, upfargs, **kwargs) for _ in range(n)]
+        for bot in self.botlist:
+            bot.randpos(self.Arena.h, self.Arena.w)
+            bot.randuvec()
+
+    def set_collider(self, collf):
+        self.collf = collf
+
+    def regenerate(self, upf, upfargs, **kwargs):
+        self.botlist = [self.Bot(self.Arena.w, self.Arena.h, upf, upfargs, **kwargs)]        
 
     # Function used when animating bots.
     # Updates bots and redraws on given axis.
@@ -30,7 +34,8 @@ class Swarm:
     def update(self):
         self.updateuvec()
         self.updatepos()
-        self.docollisions()
+        self.Arena.boundcoll(self.botlist)
+        self.collf(self.botlist)
 
     # Change the angle of the bot by a small random amount
     def updateuvec(self):
@@ -41,19 +46,6 @@ class Swarm:
     # in the direction of its uvec
     def updatepos(self):
         for bot in self.botlist: bot.pos += bot.v*bot.uvec
-
-    # Check whether each bot is in range of others
-    # and is on a collision course. If so,
-    # shift each of them away from each other by half
-    # the distance required to get them out of collision
-    # range
-    def docollisions(self):
-        self.Arena.boundcoll(self.botlist)
-        for i in range(len(self.botlist)):
-            for j in range(len(self.botlist)):
-                if(i == j):
-                    continue
-                self.botlist[i].collision(self.botlist[j])
 
     def draw(self, ax):
         for bot in self.botlist:
