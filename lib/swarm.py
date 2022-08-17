@@ -1,4 +1,5 @@
 import random
+from .interaction import InteractionMethods as IM
 
 from .fs import np
 
@@ -52,7 +53,8 @@ class Swarm:
         for bot in self.botlist: bot.pos += bot.v*bot.uvec
         
         self.Arena.boundcoll(self.botlist)
-        self.collf(random.sample(self.botlist, len(self.botlist)))
+        print(IM.getccollisions(self.botlist))
+        self.collf(self.botlist)
 
     def draw(self, plot, quiver, shapes):
         xs, ys, dxs, dys = [bot.pos[0] for bot in self.botlist], [bot.pos[1] for bot in self.botlist], [bot.uvec[0] for bot in self.botlist], [bot.uvec[1] for bot in self.botlist]
