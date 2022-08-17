@@ -1,4 +1,4 @@
-from .lib import np, distance, vecdiffr
+from .fs import np, distance, vecdiffr
 
 # Returns the angle between two vectors
 def angle(r1, r2):

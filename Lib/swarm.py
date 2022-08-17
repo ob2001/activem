@@ -1,6 +1,6 @@
 import random
 
-from .lib import np
+from .fs import np
 
 class Swarm:
     def __init__(self, arena, botlist, collf):

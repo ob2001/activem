@@ -1,4 +1,4 @@
-from ..lib import np
+from ..fs import np
 from .arena import Arena
 
 class SqSolArena(Arena):

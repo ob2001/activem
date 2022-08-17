@@ -4,11 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-from Lib.lib import randbw
-from Lib.swarm import Swarm
-from Lib.arenas import SqPerArena, SqReflArena, SqSolArena
-from Lib.bots import CircleBot, EllipseBot, PlainBot
-from Lib.interaction import InteractionMethods as IM
+from lib.fs import randbw
+from lib.swarm import Swarm
+from lib.arenas import SqPerArena, SqReflArena, SqSolArena
+from lib.bots import CircleBot, EllipseBot, PlainBot
+from lib.interaction import InteractionMethods as IM
 
 """ Main Body """
 dataout, animate, save = False, True, False

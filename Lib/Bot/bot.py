@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ..lib import np, rotvec, randbw, uvecfromang
+from ..fs import np, rotvec, randbw, uvecfromang
 
 class Bot(ABC):
     @abstractmethod
