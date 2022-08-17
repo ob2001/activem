@@ -1,6 +1,6 @@
 from .bot import Bot
 
-class VicsekBot(Bot):
+class PlainBot(Bot):
     v = 0.08
     name = "VicsekBot"
 

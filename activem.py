@@ -7,7 +7,7 @@ from matplotlib.animation import FuncAnimation
 from Lib.lib import randbw
 from Lib.swarm import Swarm
 from Lib.arenas import SqPerArena, SqReflArena, SqSolArena
-from Lib.bots import CircleBot, EllipseBot, VicsekBot
+from Lib.bots import CircleBot, EllipseBot, PlainBot
 from Lib.interaction import InteractionMethods as IM
 
 """ Main Body """
@@ -19,10 +19,12 @@ swarm = Swarm(arena, botlist, IM.ccollide)
 
 if(save and animate):
     upframes = 300
+    ani_name = "animation.mp4"
     fig = plt.figure(figsize = (10, 9))
     ax = fig.add_subplot(111, xlim = (-swarm.Arena.dw, swarm.Arena.dw), ylim = (-swarm.Arena.dh, swarm.Arena.dh))
-    ani = FuncAnimation(fig, swarm.animate, fargs = (ax,), interval = 10, frames = upframes, repeat = False)
-    ani.save("animation.mp4", fps = 30)
+    plot, quiver, shapes = swarm.ani_init(ax)
+    ani = FuncAnimation(fig, swarm.animate, fargs = (ax, plot, quiver, shapes), interval = 10, frames = upframes, repeat = False)
+    ani.save(ani_name, fps = 20)
 elif(animate):
     fig = plt.figure(figsize = (10, 9))
     ax = fig.add_subplot(111, xlim = (-swarm.Arena.dw, swarm.Arena.dw), ylim = (-swarm.Arena.dh, swarm.Arena.dh))
