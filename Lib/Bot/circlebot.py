@@ -1,7 +1,5 @@
-from ..lib import randbw, uvecfromang
 from .bot import Bot
 from matplotlib.patches import Circle
-from numpy import pi
 
 # Class for each individual bot. Each one will have
 # access to its own position, direction, etc.

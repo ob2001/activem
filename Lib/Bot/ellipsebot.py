@@ -1,4 +1,4 @@
-from ..lib import np, randbw, rotvec, angfromuvecd
+from ..lib import np, rotvec, angfromuvecd
 from .bot import Bot
 from matplotlib.patches import Ellipse
 

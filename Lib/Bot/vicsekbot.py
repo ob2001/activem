@@ -1,4 +1,3 @@
-from ..lib import np, randbw
 from .bot import Bot
 
 class VicsekBot(Bot):
