@@ -14,3 +14,6 @@ class VicsekBot(Bot):
 
     def draw(self, ax):
         pass
+
+    def redraw(self, shape):
+        pass

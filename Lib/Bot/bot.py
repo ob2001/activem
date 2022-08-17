@@ -8,8 +8,12 @@ class Bot(ABC):
         pass
 
     @abstractmethod
-    def draw(ax):
+    def draw(self, ax):
         """Method used to draw bot shape at correct position and with correct orientation, size, etc"""
+        pass
+
+    @abstractmethod
+    def redraw(self, shape):
         pass
 
     # Rotate uvec by angle specified.

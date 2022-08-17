@@ -4,10 +4,12 @@ class SqPerArena(Arena):
     def __init__(self, h, w):
         self.h = h
         self.w = w
+        self.boundschanged = False
         self.boundsup()
 
     def boundsup(self):
         self.dh, self.dw = self.h + self.h/10, self.w + self.w/10
+        self.boundschanged = True
 
     def boundcoll(self, items):
         for item in items:            

@@ -20,4 +20,7 @@ class CircleBot(Bot):
         self.r = r
 
     def draw(self, ax):
-        ax.add_patch(Circle((self.pos[0], self.pos[1]), self.r, fill = False, edgecolor = 'black'))
+        return ax.add_patch(Circle((self.pos[0], self.pos[1]), self.r, fill = False, edgecolor = 'black'))
+
+    def redraw(self, shape):
+        shape.center = self.pos[0], self.pos[1]

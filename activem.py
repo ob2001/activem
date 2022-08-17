@@ -26,7 +26,8 @@ if(save and animate):
 elif(animate):
     fig = plt.figure(figsize = (10, 9))
     ax = fig.add_subplot(111, xlim = (-swarm.Arena.dw, swarm.Arena.dw), ylim = (-swarm.Arena.dh, swarm.Arena.dh))
-    ani = FuncAnimation(fig, swarm.animate, fargs = (ax,), interval = 10, frames = None, repeat = False)
+    plot, quiver, shapes = swarm.ani_init(ax)
+    ani = FuncAnimation(fig, swarm.animate, fargs = (ax, plot, quiver, shapes), interval = 50, frames = None, repeat = False)
     plt.show()
 elif(dataout):
     frames = 2

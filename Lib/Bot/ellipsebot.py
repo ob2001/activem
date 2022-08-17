@@ -19,4 +19,8 @@ class EllipseBot(Bot):
         return rotvec(self.uvec, -np.pi/2)
 
     def draw(self, ax):
-        ax.add_patch(Ellipse((self.pos[0], self.pos[1]), self.a, self.b, fill = False, angle = 90 + angfromuvecd(self.uvec)))
+        return ax.add_patch(Ellipse((self.pos[0], self.pos[1]), self.a, self.b, fill = False, angle = 90 + angfromuvecd(self.uvec)))
+
+    def redraw(self, shape):
+        shape.center = self.pos[0], self.pos[1]
+        shape.angle = 90 + angfromuvecd(self.uvec)

@@ -1,3 +1,7 @@
+import random
+
+from .lib import np
+
 class Swarm:
     def __init__(self, arena, botlist, collf):
         self.Arena = arena
@@ -12,43 +16,48 @@ class Swarm:
         self.collf = collf
 
     def regenerate(self, upf, upfargs, **kwargs):
-        self.botlist = [self.Bot(self.Arena.w, self.Arena.h, upf, upfargs, **kwargs)]        
+        self.botlist = [self.Bot(self.Arena.w, self.Arena.h, upf, upfargs, **kwargs)]
+
+    def ani_init(self, ax):
+        xs, ys, dxs, dys = [bot.pos[0] for bot in self.botlist], [bot.pos[1] for bot in self.botlist], [bot.uvec[0] for bot in self.botlist], [bot.uvec[1] for bot in self.botlist]
+        plot, = ax.plot(xs, ys, 'bo')
+        quiver = ax.quiver(xs, ys, dxs, dys, width = 0.003)
+        shapes = [bot.draw(ax) for bot in self.botlist]
+        return plot, quiver, shapes
 
     # Function used when animating bots.
     # Updates bots and redraws on given axis.
-    def animate(self, t, ax):
+    def animate(self, t, ax, plots, quivers, shapes):
         # ** Use this to update the bounds of the arena while animating ** #
         # if(t == 100):
         #     self.Arena.w *= 5
         #     self.Arena.h *= 5
         #     self.Arena.boundsup()
-        ax.clear()
-        ax.set_xlim(-self.Arena.dw, self.Arena.dw)
-        ax.set_ylim(-self.Arena.dh, self.Arena.dh)
+        if(self.Arena.boundschanged):
+            ax.set_xlim(-self.Arena.dw, self.Arena.dw)
+            ax.set_ylim(-self.Arena.dh, self.Arena.dh)
+            self.Arena.boundschanged = False
         self.update()
-        self.draw(ax)
+        self.draw(plots, quivers, shapes)
     
     # This function is called on every frame of animation
     # to update the bots' angles, perform movement, and
     # check collisions
     def update(self):
-        self.updateuvec()
-        self.updatepos()
-        self.Arena.boundcoll(self.botlist)
-        self.collf(self.botlist)
-
-    # Change the angle of the bot by a small random amount
-    def updateuvec(self):
-        for bot in self.botlist:
-            bot.rotate(bot.upf(*bot.upfargs))
-
-    # Step the bot forward one unit of its velocity
-    # in the direction of its uvec
-    def updatepos(self):
+        # Change the angle of the bot by a small random amount
+        [bot.rotate(bot.upf(*bot.upfargs)) for bot in self.botlist]
+        
+        # Step the bot forward one unit of its velocity
+        # in the direction of its uvec
         for bot in self.botlist: bot.pos += bot.v*bot.uvec
+        
+        self.Arena.boundcoll(self.botlist)
+        self.collf(random.sample(self.botlist, len(self.botlist)))
 
-    def draw(self, ax):
-        for bot in self.botlist:
-            bot.draw(ax)
-        for bot in self.botlist: ax.plot(bot.pos[0], bot.pos[1], 'bo')
-        for bot in self.botlist: ax.quiver(bot.pos[0], bot.pos[1], bot.uvec[0], bot.uvec[1], width = 0.003)
+    def draw(self, plot, quiver, shapes):
+        xs, ys, dxs, dys = [bot.pos[0] for bot in self.botlist], [bot.pos[1] for bot in self.botlist], [bot.uvec[0] for bot in self.botlist], [bot.uvec[1] for bot in self.botlist]
+        for i, bot in enumerate(self.botlist):
+            plot.set_data(xs, ys)
+            quiver.set_offsets(np.c_[xs, ys])
+            quiver.set_UVC(dxs, dys)
+            bot.redraw(shapes[i])

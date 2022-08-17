@@ -12,6 +12,10 @@ def sees(r1, u1, thetavis, r2):
 
 class InteractionMethods():
     @staticmethod
+    def nocollision(botlist):
+        pass
+
+    @staticmethod
     def ccollide(botlist):
         collang = np.pi
         for i in range(len(botlist)):
@@ -26,7 +30,7 @@ class InteractionMethods():
                         obj2.pos += vec
                         obj1.pos -= vec
 
-    def findcollisions(self, botlist):
+    def findccollisions(self, botlist):
         pass
 
     @staticmethod

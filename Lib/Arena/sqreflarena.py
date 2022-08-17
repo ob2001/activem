@@ -4,6 +4,7 @@ class SqReflArena(Arena):
     name = "SqReflArena"
 
     def __init__(self, h, w):
+        self.boundschanged = False
         self.h = h
         self.w = w
         self.boundsup()
@@ -12,6 +13,7 @@ class SqReflArena(Arena):
     # arena bounds are changed
     def boundsup(self):
         self.dh, self.dw = self.h + self.h/10, self.w + self.w/10
+        self.boundschanged = True
 
     def boundcoll(self, items):
         for item in items:            
