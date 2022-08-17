@@ -1,3 +1,3 @@
-from .Bot.circlebot import CircleBot
-from .Bot.ellipsebot import EllipseBot
-from .Bot.vicsekbot import PlainBot
+from .bot.circlebot import CircleBot
+from .bot.ellipsebot import EllipseBot
+from .bot.vicsekbot import PlainBot

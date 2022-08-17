@@ -1,3 +1,3 @@
-from .Arena.sqperarena import SqPerArena
-from .Arena.sqreflarena import SqReflArena
-from .Arena.sqsolarena import SqSolArena
+from .arena.sqperarena import SqPerArena
+from .arena.sqreflarena import SqReflArena
+from .arena.sqsolarena import SqSolArena
