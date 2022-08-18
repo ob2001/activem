@@ -26,7 +26,7 @@ class Bot(ABC):
         self.uvec = self.uvec/np.linalg.norm(self.uvec)
 
     def randpos(self, w, h):
-        self.pos = [randbw(w), randbw(h)]
+        self.pos = np.array([randbw(w), randbw(h)])
 
     def randuvec(self):
         self.uvec = uvecfromang(randbw(np.pi))

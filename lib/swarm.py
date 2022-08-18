@@ -46,14 +46,14 @@ class Swarm:
     # check collisions
     def update(self):
         # Change the angle of the bot by a small random amount
-        [bot.rotate(bot.upf(*bot.upfargs)) for bot in self.botlist]
+        for bot in self.botlist: bot.rotate(bot.upf(*bot.upfargs))
         
         # Step the bot forward one unit of its velocity
         # in the direction of its uvec
         for bot in self.botlist: bot.pos += bot.v*bot.uvec
         
         self.Arena.boundcoll(self.botlist)
-        print(IM.getccollisions(self.botlist))
+        # print(IM.getccollisions(self.botlist))
         self.collf(self.botlist)
 
     def draw(self, plot, quiver, shapes):

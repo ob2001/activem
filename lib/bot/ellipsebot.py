@@ -25,10 +25,10 @@ class EllipseBot(Bot):
         return uarr@sigarr@uarr.T
 
     def draw(self, ax):
-        return ax.add_patch(Ellipse((self.pos[0], self.pos[1]), self.a, self.b, fill = False, angle = angfromuvecd(self.uvec)))
+        return ax.add_patch(Ellipse(self.pos, self.a, self.b, fill = False, angle = angfromuvecd(self.uvec)))
 
     def redraw(self, shape):
-        shape.center = self.pos[0], self.pos[1]
+        shape.center = self.pos
         shape.angle = angfromuvecd(self.uvec)
         if self.colliding:
             shape.set_edgecolor('r')

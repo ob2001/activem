@@ -1,3 +1,5 @@
+import numpy as np
+
 from .bot import Bot
 
 class PlainBot(Bot):
@@ -5,8 +7,8 @@ class PlainBot(Bot):
     name = "VicsekBot"
 
     def __init__(self, upf, upfargs):
-        self.pos = [0, 0]
-        self.uvec = [0, 1]
+        self.pos = np.array([0, 0])
+        self.uvec = np.array([0, 1])
         self.normalizeuvec()
         self.upf = upf
         self.upfargs = upfargs
