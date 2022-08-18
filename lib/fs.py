@@ -34,6 +34,9 @@ def uvecfromang(theta):
 def uvecfromangd(theta):
     return np.cos(np.deg2rad(theta)), np.sin(np.deg2rad(theta))
 
+def angfromuvec(v):
+    return np.arctan2(v[1], v[0])
+
 # Returns the angle of a unit vector with respect
 # to the x-axis
 def angfromuvecd(v):
