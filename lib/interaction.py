@@ -16,11 +16,15 @@ def sees(r1, u1, thetavis, r2):
     return True if phi < thetavis else False
 
 class InteractionMethods:
+    # Intentionally does nothing. Will skip collision checking from swarm
     @staticmethod
     def nocollision(botlist):
-        """Intentionally does nothing. Will skip collision checking from swarm"""
         pass
 
+    # Handles collision for a list of circle bots.
+    # Checks whether each pair of bots is within collision
+    # radius and moves them if so. Incorrect behaviour when
+    # more than 2 bots collide simultaneously
     @staticmethod
     def ccollide(botlist):
         collang = np.pi
@@ -34,6 +38,10 @@ class InteractionMethods:
                 bota.colliding = True
                 botb.colliding = True
 
+    # Collision detector for a given botlist.
+    # Returns a list of sets of colliding circle bots.
+    # To be used in ccollidemulti for groups of more
+    # than 2 bots colliding.
     @staticmethod
     def getccollisions(botlist):
         collang = np.pi
@@ -47,6 +55,8 @@ class InteractionMethods:
     def ccollidemulti(botlist):
         pass
 
+    # Handles collision for a list of ellipse bots.
+    # Calls getellcollisions() for each unique pair of ellipses.
     def ellcollide(botlist):
         for bota, botb in combinations(botlist, 2):
             coll = InteractionMethods.getellcollisions(bota, botb)
@@ -55,6 +65,9 @@ class InteractionMethods:
             if not botb.colliding:
                 botb.colliding = coll
 
+    # Collision detector for a pair of ellipses.
+    # Minimizes Kf for given pair of ellipses to determine whether
+    # they collide
     @staticmethod
     def getellcollisions(botA, botB):
         a, A = botA.pos, botA.getA()
@@ -62,6 +75,9 @@ class InteractionMethods:
         res = minimize_scalar(InteractionMethods.Kf, bracket = [0.001, 0.5, 0.999], args = (a, b, A, B))
         return res.fun >= 0.7
 
+    # Function used in ellipse collision test.
+    # If the minimum of this function for s between 0 and 1 is
+    # greater than 0, the ellipses collide
     @staticmethod
     def Kf(s, a, b, A, B):
         return 1 - (b - a).T@inv(inv(A)/(1-s)+inv(B)/s)@(b - a)

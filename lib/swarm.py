@@ -1,4 +1,3 @@
-import random
 from .interaction import InteractionMethods as IM
 
 from .fs import np
@@ -13,12 +12,16 @@ class Swarm:
             bot.randpos(self.Arena.h, self.Arena.w)
             bot.randuvec()
 
+    # Update collider being used at an arbitrary time during execution
     def set_collider(self, collf):
         self.collf = collf
 
+    # Generate a new botlist composed of the same number and type of bots
+    # used previously
     def regenerate(self, upf, upfargs, **kwargs):
         self.botlist = [self.Bot(self.Arena.w, self.Arena.h, upf, upfargs, **kwargs)]
 
+    # Call before beginning animation to get artists used universally
     def ani_init(self, ax):
         xs, ys, dxs, dys = [bot.pos[0] for bot in self.botlist], [bot.pos[1] for bot in self.botlist], [bot.uvec[0] for bot in self.botlist], [bot.uvec[1] for bot in self.botlist]
         plot, = ax.plot(xs, ys, 'bo')
@@ -27,7 +30,7 @@ class Swarm:
         return plot, quiver, shapes
 
     # Function used when animating bots.
-    # Updates bots and redraws on given axis.
+    # Updates bots and updates relevant plot elements
     def animate(self, t, ax, plots, quivers, shapes):
         # ** Use this to update the bounds of the arena while animating ** #
         # if(t == 100):
@@ -44,6 +47,9 @@ class Swarm:
     # This function is called on every frame of animation
     # to update the bots' angles, perform movement, and
     # check collisions
+
+    # Updates the swarm by one timestep.
+    # Handles motion and calls collision methods
     def update(self):
         # Change the angle of the bot by a small random amount
         for bot in self.botlist: bot.rotate(bot.upf(*bot.upfargs))
@@ -56,6 +62,7 @@ class Swarm:
         # print(IM.getccollisions(self.botlist))
         self.collf(self.botlist)
 
+    # Called by animate function to redraw all plot elements
     def draw(self, plot, quiver, shapes):
         xs, ys, dxs, dys = [bot.pos[0] for bot in self.botlist], [bot.pos[1] for bot in self.botlist], [bot.uvec[0] for bot in self.botlist], [bot.uvec[1] for bot in self.botlist]
         for i, bot in enumerate(self.botlist):
