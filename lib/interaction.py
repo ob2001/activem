@@ -1,6 +1,9 @@
 import random
+from scipy.optimize import minimize_scalar
+from itertools import combinations, permutations
 
 from .fs import np, distance, vecdiffr
+from numpy.linalg import inv
 
 # Returns the angle between two vectors
 def angle(r1, r2):
@@ -15,24 +18,21 @@ def sees(r1, u1, thetavis, r2):
 class InteractionMethods:
     @staticmethod
     def nocollision(botlist):
-        """Intentionally empty. Will skip collision checking from swarm"""
+        """Intentionally does nothing. Will skip collision checking from swarm"""
         pass
 
     @staticmethod
     def ccollide(botlist):
         collang = np.pi
         botlist = random.sample(botlist, len(botlist))
-        for i in range(len(botlist)):
-            for j in range(len(botlist)):
-                if(i == j):
-                    continue
-                else:
-                    obj1, obj2 = botlist[i], botlist[j]
-                    d = distance(obj1.pos, obj2.pos)
-                    if(d < (obj1.r + obj2.r) and angle(obj1.uvec, vecdiffr(obj1.pos, obj2.pos, 1)) < collang and sees(obj1.pos, obj1.uvec, collang, obj2.pos)):
-                        vec = vecdiffr(obj1.pos, obj2.pos, (obj1.r + obj2.r - d)/2)
-                        obj2.pos += vec
-                        obj1.pos -= vec
+        for bota, botb in combinations(botlist, 2):
+            d = distance(bota.pos, botb.pos)
+            if(d < (bota.r + botb.r) and angle(bota.uvec, vecdiffr(bota.pos, botb.pos, 1)) < collang and sees(bota.pos, bota.uvec, collang, botb.pos)):
+                vec = vecdiffr(bota.pos, botb.pos, (bota.r + botb.r - d)/2)
+                botb.pos += vec
+                bota.pos -= vec
+                bota.colliding = True
+                botb.colliding = True
 
     @staticmethod
     def getccollisions(botlist):
@@ -40,16 +40,31 @@ class InteractionMethods:
         
         coll_list = [[i] + [j for j in range(i + 1, len(botlist)) if distance(botlist[i].pos, botlist[j].pos) < (botlist[i].r + botlist[j].r) and angle(botlist[i].uvec, vecdiffr(botlist[i].pos, botlist[j].pos, 1)) < collang and sees(botlist[i].pos, botlist[i].uvec, collang, botlist[j].pos)] for i in range(len(botlist))]
 
-        coll_groups = [i for i in coll_list if len(i) > 1]
+        coll_groups = [set(i) for i in coll_list if len(i) > 1]
         return coll_groups
 
     @staticmethod
     def ccollidemulti(botlist):
-        colls = InteractionMethods.getccollisions(botlist)
         pass
 
     def ellcollide(botlist):
-        pass
+        for bota, botb in combinations(botlist, 2):
+            coll = InteractionMethods.getellcollisions(bota, botb)
+            if not bota.colliding:
+                bota.colliding = coll
+            if not botb.colliding:
+                botb.colliding = coll
+
+    @staticmethod
+    def getellcollisions(botA, botB):
+        a, A = botA.pos, botA.getA()
+        b, B = botB.pos, botB.getA()
+        res = minimize_scalar(InteractionMethods.Kf, bracket = [0.001, 0.5, 0.999], args = (a, b, A, B))
+        return res.fun >= 0.7
+
+    @staticmethod
+    def Kf(s, a, b, A, B):
+        return 1 - (b - a).T@inv(inv(A)/(1-s)+inv(B)/s)@(b - a)
 
     @staticmethod
     def vicsekflock(botlist):

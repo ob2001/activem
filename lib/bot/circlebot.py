@@ -16,9 +16,15 @@ class CircleBot(Bot):
         self.upf = upf
         self.upfargs = upfargs
         self.r = r
+        self.colliding = False
 
     def draw(self, ax):
         return ax.add_patch(Circle((self.pos[0], self.pos[1]), self.r, fill = False, edgecolor = 'black'))
 
     def redraw(self, shape):
         shape.center = self.pos[0], self.pos[1]
+        if self.colliding:
+            shape.set_edgecolor('r')
+            self.colliding = False
+        else:
+            shape.set_edgecolor('k')
