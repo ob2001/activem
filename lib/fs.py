@@ -29,20 +29,10 @@ def vecdiffr(r1, r2, r):
 def uvecfromang(theta):
     return np.cos(theta), np.sin(theta)
 
-# Returns a unit vector pointing in the direction
-# of the angle theta (degrees)
-def uvecfromangd(theta):
-    return np.cos(np.deg2rad(theta)), np.sin(np.deg2rad(theta))
-
 # Returns the angle of a unit vector with respect
 # to the x-axis
 def angfromuvec(v):
     return np.arctan2(v[1], v[0])
-
-# Returns the angle of a unit vector with respect
-# to the x-axis in degrees
-def angfromuvecd(v):
-    return np.rad2deg(np.arctan2(v[1], v[0]))
 
 # Rotate the given vector v by the angle theta in the
 # CCW direction
