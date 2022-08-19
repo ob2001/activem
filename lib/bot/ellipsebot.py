@@ -1,4 +1,4 @@
-from ..fs import np, rotvec, angfromuvecd
+from ..fs import np, rotvec, angfromuvec
 from .bot import Bot
 from matplotlib.patches import Ellipse
 
@@ -25,11 +25,11 @@ class EllipseBot(Bot):
         return uarr@sigarr@uarr.T
 
     def draw(self, ax):
-        return ax.add_patch(Ellipse(self.pos, self.a, self.b, fill = False, angle = angfromuvecd(self.uvec)))
+        return ax.add_patch(Ellipse(self.pos, self.a, self.b, fill = False, angle = np.rad2deg(angfromuvec(self.uvec))))
 
     def redraw(self, shape):
         shape.center = self.pos
-        shape.angle = angfromuvecd(self.uvec)
+        shape.angle = np.rad2deg(angfromuvec(self.uvec))
         if self.colliding:
             shape.set_edgecolor('r')
             self.colliding = False
