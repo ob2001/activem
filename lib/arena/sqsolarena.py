@@ -2,7 +2,7 @@ from ..fs import np
 from .arena import Arena
 
 class SqSolArena(Arena):
-    def __init__(self, h, w):
+    def __init__(self, h: float, w: float):
         self.boundschanged = False
         self.h = h
         self.w = w
@@ -13,7 +13,7 @@ class SqSolArena(Arena):
         self.boundschanged = True
 
 
-    def boundcoll(self, items):
+    def boundcoll(self, items: list):
         for item in items:            
             if(item.pos[0] < -self.w): item.pos[0] = -self.w
             elif(item.pos[0] > self.w): item.pos[0] = self.w
