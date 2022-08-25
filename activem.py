@@ -13,7 +13,7 @@ from lib.interaction import InteractionMethods as IM
 """ Main Body """
 dataout, animate, save = False, True, False
 l, w, numbots = 5, 5, 10
-arena = arenas.SqPerArena(l, w)
+arena = arenas.SqReflArena(l, w)
 botlist = [bots.EllipseBot(gauss, (0, 0.2), 1.5, 0.25) for _ in range(numbots)]
 swarm = Swarm(arena, botlist, IM.ellcollide)
 
@@ -22,8 +22,8 @@ if(save and animate):
     ani_name = "animation.mp4"
     fig = plt.figure(figsize = (10, 9))
     ax = fig.add_subplot(111, xlim = (-swarm.Arena.dw, swarm.Arena.dw), ylim = (-swarm.Arena.dh, swarm.Arena.dh))
-    plot, quiver, shapes = swarm.ani_init(ax)
-    ani = FuncAnimation(fig, swarm.animate, fargs = (ax, plot, quiver, shapes), interval = 10, frames = upframes, repeat = False)
+    aniargs = swarm.ani_init(ax)
+    ani = FuncAnimation(fig, swarm.animate, fargs = (ax, *aniargs), interval = 10, frames = upframes, repeat = False)
     ani.save(ani_name, fps = 20)
 
 elif(animate):
