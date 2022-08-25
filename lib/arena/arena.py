@@ -3,9 +3,9 @@ from abc import ABC, abstractmethod
 # Class for the arena in which the bots are interacting.
 class Arena(ABC):
     # TODO: Boundary types:
-    # TODO - Solid
+    # Done - Solid
     # Done - Periodic
-    # DONE - Reflective
+    # Done - Reflective
 
     # TODO: Boundary shapes:
     # TODO - Circular
@@ -16,5 +16,5 @@ class Arena(ABC):
         pass
 
     @abstractmethod
-    def boundcoll(self, items):
+    def boundcoll(self, items: list):
         pass
