@@ -9,8 +9,11 @@ def normalize(t: np.ndarray) -> np.ndarray:
 
 # Return a random number with specified resolution in
 # specified range
-def randbw(a: float) -> float:
-    return random.uniform(-a, a)
+def randbw(a: float, b = None) -> float:
+    if b is None:
+        return random.uniform(-a, a)
+    else:
+        return random.uniform(a, b)
 
 # Returns Cartesian distance between two points
 def distance(r1: np.ndarray, r2: np.ndarray) -> float:
