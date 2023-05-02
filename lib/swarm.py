@@ -16,7 +16,7 @@ class Swarm:
         self.collf = collf
 
         for bot in self.botlist:
-            bot.randpos(self.Arena.h, self.Arena.w)
+            arena.randpos(bot)
             bot.randuvec()
 
     # Update collider being used at an arbitrary time during execution
