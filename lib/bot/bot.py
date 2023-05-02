@@ -30,10 +30,6 @@ class Bot(ABC):
     def normalizeuvec(self):
         self.uvec = self.uvec/np.linalg.norm(self.uvec)
 
-    # Randomizes bot's position within given bounds
-    def randpos(self, w: float, h: float):
-        self.pos = np.array([randbw(w), randbw(h)])
-
     # Randomizes bot's orientation (ovec)
     def randuvec(self):
         self.uvec = uvecfromang(randbw(np.pi))
