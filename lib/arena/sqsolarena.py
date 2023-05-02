@@ -1,4 +1,5 @@
-from ..fs import np
+from ..fs import randbw
+from numpy import array
 from .arena import Arena
 
 class SqSolArena(Arena):
@@ -19,3 +20,6 @@ class SqSolArena(Arena):
             elif(item.pos[0] > self.w): item.pos[0] = self.w
             if(item.pos[1] < -self.h): item.pos[1] = -self.h
             elif(item.pos[1] > self.h): item.pos[1] = self.h
+
+    def randpos(self, bot):
+        bot.pos = array([randbw(self.w), randbw(self.h)])

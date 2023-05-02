@@ -1,8 +1,8 @@
 from .arena import Arena
+from numpy import array
+from ..fs import randbw
 
 class SqReflArena(Arena):
-    name = "SqReflArena"
-
     def __init__(self, h: float, w: float):
         self.boundschanged = False
         self.h = h
@@ -29,3 +29,6 @@ class SqReflArena(Arena):
             elif(item.pos[1] > self.h):
                 item.pos[1] = self.h
                 item.uvec[1] *= -1
+
+    def randpos(self, bot):
+        bot.pos = array([randbw(self.w), randbw(self.h)])

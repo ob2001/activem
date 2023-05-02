@@ -1,4 +1,6 @@
 from .arena import Arena
+from ..fs import randbw
+from numpy import array
 
 class SqPerArena(Arena):
     def __init__(self, h: float, w: float):
@@ -17,3 +19,6 @@ class SqPerArena(Arena):
             elif(item.pos[0] > self.w): item.pos[0] -= 2*self.w
             if(item.pos[1] < -self.h): item.pos[1] += 2*self.h
             elif(item.pos[1] > self.h): item.pos[1] -= 2*self.h
+
+    def randpos(self, bot):
+        bot.pos = array([randbw(self.w), randbw(self.h)])
